@@ -161,14 +161,14 @@
             <div class="input-group">
                 <label>Username</label>
                 <!-- මෙතන id="username" වෙනස් කරන්න එපා -->
-                <input type="text" id="username" placeholder="Username එක ඇතුළත් කරන්න">
+                <input type="text" id="username" placeholder="Username">
             </div>
             <div class="input-group">
                 <label>Password</label>
                 <!-- මෙතන id="password" වෙනස් කරන්න එපා -->
-                <input type="password" id="password" placeholder="Password එක ඇතුළත් කරන්න">
+                <input type="password" id="password" placeholder="Password">
             </div>
-            <button class="login-btn" id="loginBtn">Console එකට ඇතුල් වන්න</button>
+            <button class="login-btn" id="loginBtn">Console</button>
             
             <p id="error-msg" style="color: #ff4444; font-size: 13px; margin-top: 15px; display: none;">✖ වැරදි දත්ත. නැවත උත්සාහ කරන්න.</p>
         </div>
