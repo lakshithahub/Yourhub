@@ -1,13 +1,13 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YourHub | Professional Developer</title>
-    <!-- Google Fonts භාවිතා කර ඇත -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- මූලික සැකසුම් (Basic Setup) --- */
         * {
             margin: 0;
             padding: 0;
@@ -16,13 +16,13 @@
         }
 
         body {
-            background-color: #050505; /* පසුබිම් වර්ණය */
+            background-color: #050505;
             color: #ffffff;
             overflow-x: hidden; 
             transition: background 0.5s ease;
         }
 
-        /* --- Login Page එකේ පෙනුම --- */
+        /* --- Login Page --- */
         #login-page {
             height: 100vh;
             display: flex;
@@ -35,7 +35,7 @@
             background: rgba(20, 20, 20, 0.95);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2); /* රතු පැහැති shadow එක */
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
             width: 90%;
             max-width: 380px;
             text-align: center;
@@ -43,14 +43,12 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* --- ලාංඡනය සහ නම (Brand Name) --- */
         .brand-name {
             font-size: 32px;
             font-weight: 600;
             margin-bottom: 5px;
         }
 
-        /* YourHub හි 'Hub' කොටස රතු පෙට්ටියක් ලෙස */
         .brand-name span {
             background: #ff0000; 
             padding: 2px 10px;
@@ -58,7 +56,6 @@
             margin-left: 5px;
         }
 
-        /* --- Input Fields (User/Pass) --- */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -83,10 +80,9 @@
         }
 
         .input-group input:focus {
-            border-color: #ff0000; /* Click කළ විට රතු පැහැ වේ */
+            border-color: #ff0000;
         }
 
-        /* --- Login Button --- */
         .login-btn {
             width: 100%;
             padding: 14px;
@@ -105,9 +101,9 @@
             transform: scale(1.02);
         }
 
-        /* --- Dashboard එකේ පෙනුම (Main Site) --- */
+        /* --- Dashboard --- */
         #main-site { 
-            display: none; /* මුලින් මෙය නොපෙනී පවතී */
+            display: none;
             min-height: 100vh;
             background: #0a0a0a;
         }
@@ -121,7 +117,6 @@
             border-bottom: 1px solid #222;
         }
 
-        /* Dashboard එකේ ඇති Cards (Projects, Database etc) */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -136,14 +131,36 @@
             border: 1px solid #222;
             text-align: center;
             transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover { 
             border-color: #ff0000; 
             transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
         }
 
-        /* Animation */
+        /* Portfolio Specific Style */
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .project-link:hover {
+            background: #ffffff;
+            color: #ff0000;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -152,7 +169,7 @@
 </head>
 <body>
 
-    <!-- 1. ලොගින් පිටුව (Login Section) -->
+    <!-- 1. Login Section -->
     <div id="login-page">
         <div class="login-card">
             <div class="brand-name">Your<span>Hub</span></div>
@@ -160,12 +177,10 @@
 
             <div class="input-group">
                 <label>Username</label>
-                <!-- මෙතන id="username" වෙනස් කරන්න එපා -->
                 <input type="text" id="username" placeholder="Username">
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <!-- මෙතන id="password" වෙනස් කරන්න එපා -->
                 <input type="password" id="password" placeholder="Password">
             </div>
             <button class="login-btn" id="loginBtn">Console</button>
@@ -174,7 +189,7 @@
         </div>
     </div>
 
-    <!-- 2. ප්‍රධාන ඩෑෂ්බෝඩ් එක (Dashboard Section) -->
+    <!-- 2. Main Dashboard -->
     <div id="main-site">
         <nav>
             <div style="font-weight: 600; color: #ff0000;">YOURHUB // DASHBOARD</div>
@@ -183,29 +198,38 @@
 
         <header style="padding: 60px 20px; text-align: center;">
             <h1>ආයුබෝවන්, ලක්ෂිත 👋</h1>
-            <p style="color: #aaa; margin-top: 10px;">ඔබේ පද්ධති පාලක පුවරුව (Control Panel) වෙත සාදරයෙන් පිළිගනිමු.</p>
+            <p style="color: #aaa; margin-top: 10px;">ඔබේ නවතම ව්‍යාපෘති සහ පද්ධති පාලක පුවරුව.</p>
         </header>
 
         <section class="services">
-            <!-- පළමු කාඩ්පත: Projects -->
-            <div class="card">
-                <div style="font-size: 30px;">📂</div>
-                <h3>Active Projects</h3>
-                <p style="color: #888; font-size: 14px;">ඔබේ POS පද්ධති සහ මෘදුකාංග ව්‍යාපෘති මෙතැනින් පාලනය කරන්න.</p>
+            <!-- Project 1: Senarath Printers (Added by User Request) -->
+            <div class="card" style="border: 1px solid rgba(255, 0, 0, 0.4);">
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">🏪</div>
+                    <h3 style="color: #ff0000;">Senarath Printers</h3>
+                    <p style="color: #888; font-size: 14px; margin-top: 10px;">මෙය මා විසින් නිර්මාණය කරන ලද සම්පූර්ණ වෙළඳ කළමනාකරණ පද්ධතිය සහ වෙබ් අඩවියයි.</p>
+                </div>
+                <a href="https://lakshithahub.github.io/senarath-printers-book-shop/" target="_blank" class="project-link">
+                    View Project <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
 
-            <!-- දෙවන කාඩ්පත: Database -->
             <div class="card">
-                <div style="font-size: 30px;">🗄️</div>
-                <h3>Database Nodes</h3>
-                <p style="color: #888; font-size: 14px;">Cloud දත්ත ගබඩා සහ Backup පරීක්ෂා කරන්න.</p>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">📂</div>
+                    <h3>Other Projects</h3>
+                    <p style="color: #888; font-size: 14px; margin-top: 10px;">අනෙකුත් POS පද්ධති සහ මෘදුකාංග ව්‍යාපෘති මෙතැනින් බලන්න.</p>
+                </div>
+                <p style="color: #444; font-size: 12px; margin-top: 15px;">STATUS: ACTIVE</p>
             </div>
 
-            <!-- තෙවන කාඩ්පත: Analytics -->
             <div class="card">
-                <div style="font-size: 30px;">📊</div>
-                <h3>System Analytics</h3>
-                <p style="color: #888; font-size: 14px;">පද්ධතියේ ක්‍රියාකාරීත්වය සහ වේගය නිරීක්ෂණය කරන්න.</p>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">🗄️</div>
+                    <h3>Database Nodes</h3>
+                    <p style="color: #888; font-size: 14px; margin-top: 10px;">Cloud දත්ත ගබඩා සහ Backup පද්ධති වල තත්ත්වය පරීක්ෂා කරන්න.</p>
+                </div>
+                <p style="color: #444; font-size: 12px; margin-top: 15px;">STORAGE: 85% FREE</p>
             </div>
         </section>
 
@@ -214,7 +238,6 @@
         </footer>
     </div>
 
-    <!-- 3. ක්‍රියාකාරීත්වය (JavaScript) -->
     <script>
         const loginBtn = document.getElementById('loginBtn');
 
@@ -222,19 +245,23 @@
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             
-            // --- මෙතනින් Username සහ Password වෙනස් කළ හැක ---
             if (u === "admin" && p === "1234") {
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('main-site').style.display = 'block';
                 document.body.style.background = '#0a0a0a';
             } else {
-                // වැරදි නම් Error Message එක පෙන්වයි
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
 
-        // Button එක Click කළ විට පරීක්ෂා කිරීම
         loginBtn.addEventListener('click', checkLogin);
+
+        // Enter key එකෙන් Login වීමට පහසුකම
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkLogin();
+            }
+        });
     </script>
 </body>
 </html>
