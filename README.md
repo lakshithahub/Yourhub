@@ -22,7 +22,7 @@
             transition: background 0.8s ease;
         }
 
-        /* --- Login Page Styles --- */
+        /* --- Login Section --- */
         #login-page {
             height: 100vh;
             display: flex;
@@ -48,7 +48,6 @@
             font-size: 32px;
             font-weight: 600;
             margin-bottom: 5px;
-            color: #fff;
         }
 
         .brand-name span {
@@ -81,10 +80,7 @@
             transition: 0.3s;
         }
 
-        .input-group input:focus {
-            border-color: #ff0000;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-        }
+        .input-group input:focus { border-color: #ff0000; }
 
         .login-btn {
             width: 100%;
@@ -97,16 +93,9 @@
             cursor: pointer;
             transition: 0.3s;
             font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .login-btn:hover { 
-            background: #cc0000;
-            transform: scale(1.02);
-        }
-
-        /* --- Dashboard Styles --- */
+        /* --- Dashboard Section --- */
         #main-site { 
             display: none;
             opacity: 0;
@@ -127,11 +116,19 @@
             z-index: 100;
         }
 
+        .section-title {
+            padding: 40px 8% 0;
+            font-size: 24px;
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            padding: 40px 8%;
+            padding: 20px 8% 40px;
         }
 
         .card {
@@ -149,13 +146,16 @@
         .card:hover { 
             border-color: #ff0000; 
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
         }
+
+        .card h3 { margin-bottom: 10px; color: #fff; }
+        .card p { color: #888; font-size: 14px; line-height: 1.6; }
 
         .project-link {
             display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
+            margin-top: 20px;
+            padding: 12px 25px;
             background: #ff0000;
             color: white;
             text-decoration: none;
@@ -165,10 +165,7 @@
             transition: 0.3s;
         }
 
-        .project-link:hover {
-            background: #ffffff;
-            color: #ff0000;
-        }
+        .project-link:hover { background: #fff; color: #ff0000; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -181,85 +178,93 @@
             color: #444;
             font-size: 12px;
             border-top: 1px solid #1a1a1a;
-            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Login Section -->
+    <!-- 1. Login Page -->
     <div id="login-page">
         <div class="login-card">
             <div class="brand-name">Your<span>Hub</span></div>
-            <p style="color: #888; font-size: 10px; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">System Developer Node</p>
-
+            <p style="color: #888; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px;">DEV CONSOLE V2.0</p>
             <div class="input-group">
-                <label>Access Key (Username)</label>
-                <input type="text" id="username" placeholder="Username" autocomplete="off">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="admin">
             </div>
             <div class="input-group">
-                <label>Security Pin (Password)</label>
-                <input type="password" id="password" placeholder="••••••••">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••">
             </div>
-            <button class="login-btn" id="loginBtn">Initialize Console</button>
-            
-            <p id="error-msg" style="color: #ff4444; font-size: 13px; margin-top: 15px; display: none;">✖ Invalid Credentials. Access Denied.</p>
+            <button class="login-btn" id="loginBtn">Initialize Access</button>
+            <p id="error-msg" style="color: #ff4444; font-size: 13px; margin-top: 15px; display: none;">✖ Access Denied. Check Credentials.</p>
         </div>
     </div>
 
-    <!-- 2. Main Dashboard -->
+    <!-- 2. Main Site Dashboard -->
     <div id="main-site">
         <nav>
-            <div style="font-weight: 600; color: #ff0000; letter-spacing: 1px;">YOURHUB // CENTRAL COMMAND</div>
-            <div style="cursor:pointer; font-size: 12px; color: #888; border: 1px solid #333; padding: 6px 18px; border-radius: 20px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'" onclick="location.reload()">Terminate Session 🔒</div>
+            <div style="font-weight: 600; color: #ff0000;">YOURHUB // DASHBOARD</div>
+            <div style="cursor:pointer; font-size: 12px; color: #888; border: 1px solid #333; padding: 5px 15px; border-radius: 20px;" onclick="location.reload()">Log Out 🔒</div>
         </nav>
 
-        <header style="padding: 80px 20px 40px; text-align: center;">
-            <h1 style="font-size: 2.5rem;">Welcome, Lakshitha 👋</h1>
-            <p style="color: #aaa; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">Developer console active. Managing all POS systems, database nodes, and professional deployments from one central hub.</p>
+        <header style="padding: 60px 20px; text-align: center;">
+            <h1>Welcome back, Lakshitha 👋</h1>
+            <p style="color: #aaa; margin-top: 10px;">System Developer | Professional Software Solutions</p>
         </header>
 
+        <!-- Live Projects Section -->
+        <h2 class="section-title">Live Deployments</h2>
         <section class="services">
-            <!-- Project 1: Senarath Printers -->
-            <div class="card" style="border: 1px solid rgba(255, 0, 0, 0.3);">
+            <div class="card" style="border: 1px solid rgba(255, 0, 0, 0.4);">
                 <div>
                     <div style="font-size: 40px; margin-bottom: 15px;">🏪</div>
-                    <h3 style="color: #ff0000;">Senarath Printers</h3>
-                    <p style="color: #bbb; font-size: 14px; margin-top: 10px; line-height: 1.6;">Full Inventory & Sales Management System. Designed for high-performance retail operations.</p>
+                    <h3>Senarath Printers</h3>
+                    <p>Complete POS & Inventory management system developed for retail operations.</p>
                 </div>
-                <a href="https://lakshithahub.github.io/senarath-printers-book-shop/" target="_blank" class="project-link">
-                    Launch System <i class="fas fa-external-link-alt"></i>
-                </a>
+                <a href="https://lakshithahub.github.io/senarath-printers-book-shop/" target="_blank" class="project-link">Open System</a>
             </div>
 
-            <!-- Project 2: Current Login Deployment -->
             <div class="card">
                 <div>
                     <div style="font-size: 40px; margin-bottom: 15px;">🔑</div>
                     <h3>Auth Gateway</h3>
-                    <p style="color: #888; font-size: 14px; margin-top: 10px; line-height: 1.6;">The secure portal managing access to all sub-directories and private projects.</p>
+                    <p>Secure login interface used for project authentication and node management.</p>
                 </div>
-                <a href="https://lakshithahub.github.io/login/" target="_blank" class="project-link" style="background: #333;">
-                    View Source <i class="fas fa-code"></i>
-                </a>
+                <a href="https://lakshithahub.github.io/login/" target="_blank" class="project-link" style="background: #333;">View Interface</a>
             </div>
+        </section>
 
-            <!-- Project 3: Database Status -->
+        <!-- Portfolio Showcase Section -->
+        <h2 class="section-title">My Portfolio</h2>
+        <section class="services">
             <div class="card">
                 <div>
-                    <div style="font-size: 40px; margin-bottom: 15px;">🗄️</div>
-                    <h3>Database Cluster</h3>
-                    <p style="color: #888; font-size: 14px; margin-top: 10px;">Monitoring active JSON and SQL nodes for all deployed software systems.</p>
+                    <div style="font-size: 40px; margin-bottom: 15px;">🌐</div>
+                    <h3 style="color: #38bdf8;">Web Development</h3>
+                    <p>Modern, responsive websites with clean code and high performance optimization.</p>
                 </div>
-                <div style="margin-top: 20px;">
-                    <span style="color: #00ff00; font-size: 12px; font-weight: 600;">● SYSTEM ONLINE</span>
+            </div>
+
+            <div class="card">
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">📊</div>
+                    <h3 style="color: #38bdf8;">POS Solutions</h3>
+                    <p>Custom software for sales, inventory tracking, and business automation.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 15px;">📱</div>
+                    <h3 style="color: #38bdf8;">Mobile Dev</h3>
+                    <p>Expertise in developing complex systems entirely through mobile environments.</p>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p>&copy; 2026 YOURHUB | PROFESSIONAL SYSTEM DEVELOPER</p>
-            <p style="margin-top: 10px; color: #666;">Contact: +94 76 999 6722 | Sri Lanka</p>
+            <p>&copy; 2026 YOURHUB | BY LAKSHITHA | +94 76 999 6722</p>
         </footer>
     </div>
 
@@ -272,35 +277,21 @@
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             
-            // Credentials: admin / 1234
             if (u === "admin" && p === "1234") {
-                // Smooth Fade Out
                 loginPage.style.opacity = '0';
-                
                 setTimeout(() => {
                     loginPage.style.display = 'none';
                     mainSite.style.display = 'block';
-                    
-                    // Smooth Fade In for Dashboard
-                    setTimeout(() => {
-                        mainSite.style.opacity = '1';
-                        document.body.style.background = '#0a0a0a';
-                    }, 50);
+                    setTimeout(() => { mainSite.style.opacity = '1'; }, 50);
+                    document.body.style.background = '#0a0a0a';
                 }, 500);
             } else {
-                const error = document.getElementById('error-msg');
-                error.style.display = 'block';
-                // Shake effect logic can be added here
+                document.getElementById('error-msg').style.display = 'block';
             }
         }
 
         loginBtn.addEventListener('click', checkLogin);
-
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkLogin();
-            }
-        });
+        document.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkLogin(); });
     </script>
 </body>
 </html>
