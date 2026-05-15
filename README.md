@@ -69,7 +69,7 @@
             margin-bottom: 8px;
         }
 
-        .input-group input {
+        .input-group input, .input-group textarea {
             width: 100%;
             padding: 14px;
             border-radius: 10px;
@@ -80,7 +80,7 @@
             transition: 0.3s;
         }
 
-        .input-group input:focus { border-color: #ff0000; }
+        .input-group input:focus, .input-group textarea:focus { border-color: #ff0000; }
 
         .login-btn {
             width: 100%;
@@ -133,7 +133,7 @@
 
         .card {
             background: #161616;
-            padding: 40px 30px;
+            padding: 30px;
             border-radius: 20px;
             border: 1px solid #222;
             text-align: center;
@@ -141,6 +141,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         .card:hover { 
@@ -150,11 +151,29 @@
         }
 
         .card h3 { margin-bottom: 10px; color: #fff; }
-        .card p { color: #888; font-size: 14px; line-height: 1.6; }
+        .card p { color: #888; font-size: 14px; line-height: 1.6; margin-bottom: 15px;}
+
+        .media-container {
+            width: 100%;
+            height: 150px;
+            background: #222;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-container img, .media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .project-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: auto;
             padding: 12px 25px;
             background: #ff0000;
             color: white;
@@ -166,6 +185,30 @@
         }
 
         .project-link:hover { background: #fff; color: #ff0000; }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,0,0,0.2);
+            color: #ff4444;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+        .delete-btn:hover { background: #ff0000; color: #fff; }
+
+        /* --- Form Container --- */
+        .form-container {
+            background: #111;
+            margin: 30px 8%;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -213,9 +256,34 @@
             <p style="color: #aaa; margin-top: 10px;">System Developer | Professional Software Solutions</p>
         </header>
 
+        <!-- Dynamic Add Project Form -->
+        <div class="form-container">
+            <h3 style="color: #ff0000; margin-bottom: 20px;"><i class="fa-solid fa-plus"></i> Add New Deployment / Project</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="input-group">
+                    <label>Project Title</label>
+                    <input type="text" id="projTitle" placeholder="e.g., My New App">
+                </div>
+                <div class="input-group">
+                    <label>Media URL (Image or Video Link)</label>
+                    <input type="text" id="projMedia" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="input-group">
+                    <label>Live Project URL</label>
+                    <input type="text" id="projLink" placeholder="https://lakshithahub.github.io/...">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Description</label>
+                <textarea id="projDesc" rows="3" placeholder="Briefly explain the project functionalities..."></textarea>
+            </div>
+            <button class="login-btn" onclick="saveProject()" style="width: auto; padding: 12px 30px;">Save Project</button>
+        </div>
+
         <!-- Live Projects Section -->
         <h2 class="section-title">Live Deployments</h2>
-        <section class="services">
+        <section class="services" id="project-list">
+            <!-- Dynamic and Static items will load here -->
             <div class="card" style="border: 1px solid rgba(255, 0, 0, 0.4);">
                 <div>
                     <div style="font-size: 40px; margin-bottom: 15px;">🏪</div>
@@ -284,6 +352,7 @@
                     mainSite.style.display = 'block';
                     setTimeout(() => { mainSite.style.opacity = '1'; }, 50);
                     document.body.style.background = '#0a0a0a';
+                    loadProjects(); // Load saved projects on login success
                 }, 500);
             } else {
                 document.getElementById('error-msg').style.display = 'block';
@@ -292,6 +361,83 @@
 
         loginBtn.addEventListener('click', checkLogin);
         document.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkLogin(); });
+
+        // --- Custom Project Dynamic Logic ---
+        
+        function saveProject() {
+            const title = document.getElementById('projTitle').value;
+            const media = document.getElementById('projMedia').value;
+            const link = document.getElementById('projLink').value;
+            const desc = document.getElementById('projDesc').value;
+
+            if(!title || !desc) {
+                alert("Please fill out at least Title and Description!");
+                return;
+            }
+
+            const newProject = { id: Date.now(), title, media, link, desc };
+
+            // Get existing or init empty array
+            let projects = JSON.parse(localStorage.getItem('myProjects')) || [];
+            projects.push(newProject);
+            localStorage.setItem('myProjects', JSON.stringify(projects));
+
+            // Clear Inputs
+            document.getElementById('projTitle').value = '';
+            document.getElementById('projMedia').value = '';
+            document.getElementById('projLink').value = '';
+            document.getElementById('projDesc').value = '';
+
+            loadProjects();
+        }
+
+        function loadProjects() {
+            // Keep the static templates intact, clear only dynamic elements added before
+            const container = document.getElementById('project-list');
+            
+            // Remove previous dynamic cards to prevent duplication
+            document.querySelectorAll('.dynamic-card').forEach(el => el.remove());
+
+            const projects = JSON.parse(localStorage.getItem('myProjects')) || [];
+
+            projects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'card dynamic-card';
+                
+                // Detect whether media URL is video or image
+                let mediaHtml = '';
+                if(proj.media) {
+                    const isVideo = proj.media.match(/\.(mp4|webm|ogg)/i) || proj.media.includes('youtube') || proj.media.includes('drive.google');
+                    if(isVideo) {
+                        mediaHtml = `<div class="media-container"><video src="${proj.media}" controls muted></video></div>`;
+                    } else {
+                        mediaHtml = `<div class="media-container"><img src="${proj.media}" alt="Project Visual"></div>`;
+                    }
+                } else {
+                    // Fallback icon if no media provided
+                    mediaHtml = `<div class="media-container" style="font-size: 40px;">🚀</div>`;
+                }
+
+                card.innerHTML = `
+                    <button class="delete-btn" onclick="deleteProject(${proj.id})">Delete 🗑️</button>
+                    <div>
+                        ${mediaHtml}
+                        <h3>${proj.title}</h3>
+                        <p>${proj.desc}</p>
+                    </div>
+                    ${proj.link ? `<a href="${proj.link}" target="_blank" class="project-link">Open Project</a>` : ''}
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        function deleteProject(id) {
+            let projects = JSON.parse(localStorage.getItem('myProjects')) || [];
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem('myProjects', JSON.stringify(projects));
+            loadProjects();
+        }
     </script>
 </body>
 </html>
