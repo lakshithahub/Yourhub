@@ -19,89 +19,79 @@
             background-color: #050505;
             color: #ffffff;
             overflow-x: hidden;
-            transition: background 0.8s ease;
         }
 
-        /* --- Login Section --- */
-        #login-page {
+        /* --- Advanced Splash Loading Screen --- */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
             height: 100vh;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-            transition: opacity 0.5s ease;
+            z-index: 9999;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
         }
 
-        .login-card {
-            background: rgba(20, 20, 20, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            border: 1px solid #333;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .brand-name {
-            font-size: 32px;
+        .loader-logo {
+            font-size: 42px;
             font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .brand-name span {
-            background: #ff0000; 
-            padding: 2px 10px;
-            border-radius: 6px;
-            margin-left: 5px;
-        }
-
-        .input-group {
+            letter-spacing: 2px;
+            color: #ffffff;
             margin-bottom: 20px;
-            text-align: left;
+            animation: logoPulse 2s infinite ease-in-out;
+            display: flex;
+            align-items: center;
         }
 
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            color: #aaa;
-            margin-bottom: 8px;
-        }
-
-        .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid #444;
-            background: #111;
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus, .input-group textarea:focus { border-color: #ff0000; }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
+        .loader-logo span {
             background: #ff0000;
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 16px;
+            padding: 2px 12px;
+            border-radius: 6px;
+            margin-left: 8px;
+            font-size: 32px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+            animation: glowPulse 2s infinite ease-in-out;
         }
 
-        /* --- Dashboard Section --- */
+        .loader-bar-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff5555);
+            box-shadow: 0 0 10px #ff0000;
+            border-radius: 10px;
+            animation: fillProgress 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        .loader-text {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: textFade 1.5s infinite alternate;
+        }
+
+        /* --- Main Site Dashboard --- */
         #main-site { 
-            display: none;
             opacity: 0;
+            display: none;
             min-height: 100vh;
             background: #0a0a0a;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.8s ease-out;
         }
 
         nav {
@@ -114,6 +104,20 @@
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .brand-name span {
+            background: #ff0000; 
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 5px;
+            font-size: 14px;
         }
 
         .section-title {
@@ -146,7 +150,7 @@
 
         .card:hover { 
             border-color: #ff0000; 
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
         }
 
@@ -210,9 +214,64 @@
             border: 1px solid #222;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            background: #111;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus, .input-group textarea:focus { border-color: #ff0000; }
+
+        .action-btn {
+            padding: 12px 30px;
+            background: #ff0000;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .action-btn:hover { background: #cc0000; }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255,255,255,0)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }
+        }
+
+        @keyframes textFade {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
         }
 
         footer {
@@ -226,34 +285,27 @@
 </head>
 <body>
 
-    <!-- 1. Login Page -->
-    <div id="login-page">
-        <div class="login-card">
-            <div class="brand-name">Your<span>Hub</span></div>
-            <p style="color: #888; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px;">DEV CONSOLE V2.0</p>
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" id="username" placeholder="admin">
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="••••">
-            </div>
-            <button class="login-btn" id="loginBtn">Initialize Access</button>
-            <p id="error-msg" style="color: #ff4444; font-size: 13px; margin-top: 15px; display: none;">✖ Access Denied. Check Credentials.</p>
+    <!-- 1. Dynamic Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-logo">YOUR<span>HUB</span></div>
+        <div class="loader-bar-container">
+            <div class="loader-bar"></div>
         </div>
+        <div class="loader-text">Initializing Console</div>
     </div>
 
     <!-- 2. Main Site Dashboard -->
     <div id="main-site">
         <nav>
-            <div style="font-weight: 600; color: #ff0000;">YOURHUB // DASHBOARD</div>
-            <div style="cursor:pointer; font-size: 12px; color: #888; border: 1px solid #333; padding: 5px 15px; border-radius: 20px;" onclick="location.reload()">Log Out 🔒</div>
+            <div class="brand-name">YOURHUB<span>CONSOLE</span></div>
+            <div style="font-size: 12px; color: #888; border: 1px solid #333; padding: 5px 15px; border-radius: 20px;">
+                <i class="fa-solid fa-circle" style="color: #00ff00; font-size: 9px; margin-right: 5px;"></i> Live
+            </div>
         </nav>
 
         <header style="padding: 60px 20px; text-align: center;">
-            <h1>Welcome back, Lakshitha 👋</h1>
-            <p style="color: #aaa; margin-top: 10px;">System Developer | Professional Software Solutions</p>
+            <h1 style="font-weight: 600;">Welcome back, Lakshitha 👋</h1>
+            <p style="color: #aaa; margin-top: 10px; letter-spacing: 1px;">System Developer | Professional Software Solutions</p>
         </header>
 
         <!-- Dynamic Add Project Form -->
@@ -277,13 +329,13 @@
                 <label>Description</label>
                 <textarea id="projDesc" rows="3" placeholder="Briefly explain the project functionalities..."></textarea>
             </div>
-            <button class="login-btn" onclick="saveProject()" style="width: auto; padding: 12px 30px;">Save Project</button>
+            <button class="action-btn" onclick="saveProject()">Save Project</button>
         </div>
 
         <!-- Live Projects Section -->
         <h2 class="section-title">Live Deployments</h2>
         <section class="services" id="project-list">
-            <!-- Dynamic and Static items will load here -->
+            <!-- Static Items -->
             <div class="card" style="border: 1px solid rgba(255, 0, 0, 0.4);">
                 <div>
                     <div style="font-size: 40px; margin-bottom: 15px;">🏪</div>
@@ -337,33 +389,28 @@
     </div>
 
     <script>
-        const loginBtn = document.getElementById('loginBtn');
-        const loginPage = document.getElementById('login-page');
-        const mainSite = document.getElementById('main-site');
+        // Page එක සම්පූර්ණයෙන්ම load වූ පසු ක්‍රියාත්මක වන කොටස
+        window.addEventListener('load', () => {
+            loadProjects(); // Projects load කිරීම
 
-        function checkLogin() {
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            
-            if (u === "admin" && p === "1234") {
-                loginPage.style.opacity = '0';
+            // තත්පර 2.2 කට පසු Loading Screen එක ඉවත් කර Dashboard එක පෙන්වීම
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                const mainSite = document.getElementById('main-site');
+                
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                
+                mainSite.style.display = 'block';
+                // සිනිඳු ලෙස Dashboard එක මතු වීමට (Fade-in effect)
                 setTimeout(() => {
-                    loginPage.style.display = 'none';
-                    mainSite.style.display = 'block';
-                    setTimeout(() => { mainSite.style.opacity = '1'; }, 50);
-                    document.body.style.background = '#0a0a0a';
-                    loadProjects(); // Load saved projects on login success
-                }, 500);
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
-
-        loginBtn.addEventListener('click', checkLogin);
-        document.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkLogin(); });
+                    mainSite.style.opacity = '1';
+                }, 50);
+                
+            }, 2200); 
+        });
 
         // --- Custom Project Dynamic Logic ---
-        
         function saveProject() {
             const title = document.getElementById('projTitle').value;
             const media = document.getElementById('projMedia').value;
@@ -377,12 +424,10 @@
 
             const newProject = { id: Date.now(), title, media, link, desc };
 
-            // Get existing or init empty array
             let projects = JSON.parse(localStorage.getItem('myProjects')) || [];
             projects.push(newProject);
             localStorage.setItem('myProjects', JSON.stringify(projects));
 
-            // Clear Inputs
             document.getElementById('projTitle').value = '';
             document.getElementById('projMedia').value = '';
             document.getElementById('projLink').value = '';
@@ -392,10 +437,7 @@
         }
 
         function loadProjects() {
-            // Keep the static templates intact, clear only dynamic elements added before
             const container = document.getElementById('project-list');
-            
-            // Remove previous dynamic cards to prevent duplication
             document.querySelectorAll('.dynamic-card').forEach(el => el.remove());
 
             const projects = JSON.parse(localStorage.getItem('myProjects')) || [];
@@ -404,7 +446,6 @@
                 const card = document.createElement('div');
                 card.className = 'card dynamic-card';
                 
-                // Detect whether media URL is video or image
                 let mediaHtml = '';
                 if(proj.media) {
                     const isVideo = proj.media.match(/\.(mp4|webm|ogg)/i) || proj.media.includes('youtube') || proj.media.includes('drive.google');
@@ -414,7 +455,6 @@
                         mediaHtml = `<div class="media-container"><img src="${proj.media}" alt="Project Visual"></div>`;
                     }
                 } else {
-                    // Fallback icon if no media provided
                     mediaHtml = `<div class="media-container" style="font-size: 40px;">🚀</div>`;
                 }
 
